@@ -1,0 +1,45 @@
+<form [formGroup]="productDetails" (ngSubmit)="onSubmit(productDetails)" *ngIf="this.productDetails" novalidate>
+
+    <select [(ngModel)]="value" (change)="fetchProductDetails(value)" formControlName="productName">
+        <option *ngFor="let names of productNames" [value]="names">{{names}}</option>
+    </select>
+    <br><br>
+    <div *ngIf="product">
+        <p><strong>Product Data To be Updated</strong></p>
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">{{product.itemName}}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label class="switch">
+                    <input type="checkbox" (click)="clickEvent()" [ngClass]="status ? 'success' : 'danger'">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="card-body text-dark">
+                <p class="card-text"><label>ID:</label>&nbsp;&nbsp;{{product.id}}<br></p>
+
+                <label>Quantity:</label>&nbsp;&nbsp;{{product.quantity}}
+                <input type="text" class="form-control" id="quantity" placeholder="Enter New Quantity"
+                    formControlName="quantity" width="50px">
+                <br>
+
+                <label>itemTotal:</label>&nbsp;&nbsp;{{product.itemTotal}}
+                <input type="text" class="form-control" id="itemTotal" placeholder="Enter New Cost"
+                    formControlName="itemTotal" width="50px">
+                <br>
+
+                <label>state:</label>&nbsp;&nbsp;{{product.state}}
+                <select formControlName="state">
+                    <option *ngFor="let state of values(state);" [value]="state">{{state}}</option>
+                </select>
+                <br>
+
+                <label>age:</label>&nbsp;&nbsp;{{product.age}}
+                <select formControlName="age">
+                    <option *ngFor="let age of values(age);" [value]="age">{{age}}</option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-primary">Update Product</button>
+            </div>
+        </div>
+    </div>
+</form>

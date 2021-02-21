@@ -27,8 +27,6 @@ export class ProductService {
   }
 
   toggleProduct(toggle:string,name:string):Observable<any>{
-    console.log(toggle);
-    
     let httpParams = new HttpParams()
       .set('toggle',toggle)
       .set('name',name);

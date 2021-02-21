@@ -1,1 +1,51 @@
-<p>product-search works!</p>
+<form [formGroup]="productDetails" *ngIf="this.productDetails" novalidate (keydown)=keyDown($event,productDetails)>
+    <div class="main">
+        <div class="form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" formControlName="productName" class="form-control" placeholder="Search">
+        </div>
+    </div>
+    <div class="form-check">
+        <label class="custom-control-inline">Select Category</label>
+        <ng-container class="form-check-input custom-control-inline" *ngFor="let category of values(category);">
+            <input type="radio" id="category" name="category" value="{{category}}" formControlName="category"
+                class="custom-control-inline">{{category}}
+        </ng-container>
+    </div>
+    <div class="form-check">
+        <label class="custom-control-inline">Select Age</label>
+        <ng-container class="form-check-input custom-control-inline" *ngFor="let age of values(age);">
+            <input type="radio" id="age" name="age" value="{{age}}" formControlName="age"
+                class="custom-control-inline">{{age}}
+        </ng-container>
+    </div>
+    <div class="form-check">
+        <label class="custom-control-inline">Select State</label>
+        <ng-container class="form-check-input custom-control-inline" *ngFor="let state of values(state);">
+            <input type="radio" id="state" name="state" value="{{state}}" formControlName="state"
+                class="custom-control-inline">{{state}}
+        </ng-container>
+    </div>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" formControlName="quantity" name="quantity" min="1" placeholder="(>0)">
+</form>
+<div *ngIf="this.items">
+    <p><strong>Data Fetched From server</strong></p>
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">{{items.productName}}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="card-body text-dark">
+            <p class="card-text"><label>Category:</label>&nbsp;&nbsp;{{items.category}}<br></p>
+            <label>Quantity:</label>&nbsp;&nbsp;{{items.quantity}}
+            <br>
+            <label>itemTotal:</label>&nbsp;&nbsp;{{items.itemTotal}}
+            <br>
+            <label>state:</label>&nbsp;&nbsp;{{items.state}}
+            <br>
+            <label>age:</label>&nbsp;&nbsp;{{items.age}}
+            <br><hr>
+            <button class="btn btn-primary" type="submit" (click)="addProductToCart(items.productName)">Add to Cart</button>
+        </div>
+    </div>
+</div>

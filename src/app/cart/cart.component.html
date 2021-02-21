@@ -1,1 +1,23 @@
-<p>cart works!</p>
+<div *ngIf="this.cart">
+    <p><strong>Data Fetched From server</strong></p>
+    <div *ngFor="let item of cart.product">
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">{{item.itemName}}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="card-body text-dark">
+                <p class="card-text"><label>ID:</label>&nbsp;&nbsp;{{item.id}}<br></p>
+                <label>Quantity:</label>&nbsp;&nbsp;{{item.quantity}}
+                <br>
+                <label>itemTotal:</label>&nbsp;&nbsp;{{item.itemTotal}}
+                <br>
+                <label>state:</label>&nbsp;&nbsp;{{item.state}}
+                <br>
+                <label>age:</label>&nbsp;&nbsp;{{item.age}}
+                <br>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-primary" type="submit" (click)="proceedToCheckOut()">Proceed To CheckOut</button>

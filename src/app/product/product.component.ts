@@ -41,9 +41,7 @@ export class ProductComponent implements OnInit {
       msg => {
         console.log(msg);
       });
+    window.alert("Product added successfully");
     this.productDetails.reset();
   }
-
-
-
 }

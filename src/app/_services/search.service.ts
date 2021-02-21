@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Roles } from "../_enum/roles.enum";
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 const API_URL='http://192.168.225.123:8080/medicare/user'
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +10,13 @@ const httpOptions = {
 export class SearchService {
   constructor(private httpClient:HttpClient) { }
 
-  searchAndFilterProduct(productName:string,state:string,age:string,category:string,quantity:number):Observable<any>{
+  searchAndFilterProduct(...form: any[]):Observable<any>{
     let httpParams = new HttpParams()
-    .set('product',productName)
-    .set('age',age)
-    .set('state',state)
-    .set('category',category)
-    .set('quantity',<string><any>quantity);
-
-    return this.httpClient.post(API_URL + Roles.user,{httpParams},httpOptions);
+    .set('product',form[0].productName)
+    .set('age',form[0].age)
+    .set('state',form[0].state)
+    .set('category',form[0].category)
+    .set('quantity',<string>form[0].quantity);
+    return this.httpClient.post(API_URL,httpParams);
   }
 }
